@@ -2,7 +2,7 @@ import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:cinemapedia/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
+// proveedor de informacion que notifica cuando se cambia el estado
 final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
 
   final fetchMoreMovies = ref.watch( movieRepositoryProvider ).getNowPlaying;
@@ -13,9 +13,11 @@ final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movi
 });
 
 
-
+// typedef se utiliza para definir un tipo de funcion
 typedef MovieCallback = Future<List<Movie>> Function({ int page });
 
+
+// StateNotifier es una clase para manejar el estado
 class MoviesNotifier extends StateNotifier<List<Movie>> {
   
   int currentPage = 0;

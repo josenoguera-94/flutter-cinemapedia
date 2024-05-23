@@ -31,6 +31,7 @@ class MovieMovieDB {
     final double voteAverage;
     final int voteCount;
 
+    // el modelo valida algunos campos que pueden ser nulos y demás
     factory MovieMovieDB.fromJson(Map<String, dynamic> json) => MovieMovieDB(
         adult: json["adult"] ?? false,
         backdropPath: json["backdrop_path"] ?? '',
