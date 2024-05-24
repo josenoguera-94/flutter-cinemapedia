@@ -22,12 +22,12 @@ class MoviesSlideshow extends StatelessWidget {
       height: 210,
       width: double.infinity,
       child: Swiper(
-        viewportFraction: 0.8,
-        scale: 0.9,
+        viewportFraction: 0.8, // Fracción de la pantalla que ocupará el slide
+        scale: 0.9, // Escala del slide
         autoplay: true,
-        pagination: SwiperPagination(
+        pagination: SwiperPagination( // Paginación del slide
           margin: const EdgeInsets.only(top: 0),
-          builder: DotSwiperPaginationBuilder(
+          builder: DotSwiperPaginationBuilder( // Constructor de la paginación
             activeColor: colors.primary,
             color: colors.secondary
           )

@@ -52,24 +52,27 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final topRatedMovies = ref.watch( topRatedMoviesProvider );
     final upcomingMovies = ref.watch( upcomingMoviesProvider );
 
-    return CustomScrollView(
+    // Visibility es un widget que se encarga de mostrar u ocultar un widget
+    // SingleChildScrollView es un widget que se encarga de crear un scroll de manera sencilla
+    return CustomScrollView( // CustomScrollView es un widget que se encarga de crear un scroll personalizado
       slivers: [
-
-        const SliverAppBar(
+        // slivers es una lista de widgets que se encargan de crear un scroll personalizado
+        const SliverAppBar( // SliverAppBar es un widget que se encarga de crear un appbar personalizado
           floating: true,
-          flexibleSpace: FlexibleSpaceBar(
+          flexibleSpace: FlexibleSpaceBar( // FlexibleSpaceBar es un widget que se encarga de crear un espacio flexible en el appbar
             title: CustomAppbar(),
           ),
         ),
 
-
-        SliverList(delegate: SliverChildBuilderDelegate(
+        // SliverList es un widget que se encarga de crear una lista de elementos de manera eficiente en un scroll personalizado
+        // para que no se desborde
+        SliverList(delegate: SliverChildBuilderDelegate( // 
           (context, index) {
               return Column(
                   children: [
               
                     // const CustomAppbar(),
-              
+                    // slideShowMovies.sublist(0, 5).map((movie) => _Slide(movie: movie)).toList(),
                     MoviesSlideshow(movies: slideShowMovies ),
               
                     MovieHorizontalListview(

@@ -35,6 +35,10 @@ class FullScreenLoader extends StatelessWidget {
             stream: getLoadingMessages(),
             builder: (context, snapshot) {
               if ( !snapshot.hasData ) return const Text('Cargando...');
+
+              // !variable -> niega la variable
+              // variable! -> convierte la variable en no nula, si la variable es nula, lanza un error
+              // variable? -> convierte la variable en nullable, si la variable es nula, no lanza un error
               
               return Text( snapshot.data! );
             },

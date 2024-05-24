@@ -9,7 +9,7 @@ class CustomAppbar extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     final titleStyle = Theme.of(context).textTheme.titleMedium;
 
-    return SafeArea(
+    return SafeArea( // SafeArea es un widget que se encarga de que el contenido no se superponga con el notch o la barra de estado
       bottom: false,
       child: Padding(
         padding: const EdgeInsets.symmetric( horizontal: 10 ),
@@ -21,7 +21,7 @@ class CustomAppbar extends StatelessWidget {
               const SizedBox( width: 5 ),
               Text('Cinemapedia', style: titleStyle ),
       
-              const Spacer(),
+              const Spacer(), // Spacer es un widget que se encarga de ocupar todo el espacio posible
       
               IconButton(onPressed: (){
       

@@ -63,6 +63,8 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
 
 
           Expanded(
+            // ListView.builder es un widget que se encarga de crear una lista de elementos de manera eficiente
+            // cuando tienes muchos datos que  mostrar o no sabes cuantos son es mejor este widget que un ListView normal
             child: ListView.builder(
               controller: scrollController,
               itemCount: widget.movies.length,
@@ -105,7 +107,7 @@ class _Slide extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: Image.network(
                 movie.posterPath,
-                fit: BoxFit.cover,
+                fit: BoxFit.cover, // BoxFit.cover es una propiedad que se encarga de ajustar la imagen al tamaño del contenedor
                 width: 150,
                 loadingBuilder: (context, child, loadingProgress) {
                   if ( loadingProgress != null ) {
@@ -123,11 +125,11 @@ class _Slide extends StatelessWidget {
           const SizedBox(height: 5),
 
           //* Title
-          SizedBox(
+          SizedBox( // SizedBox es un widget que se encarga de crear un espacio con un tamaño fijo
             width: 150,
             child: Text(
               movie.title,
-              maxLines: 2,
+              maxLines: 2, // maxLines es una propiedad que se encarga de limitar el número de líneas que se mostrarán
               style: textStyles.titleSmall,
             ),
           ),
@@ -139,6 +141,7 @@ class _Slide extends StatelessWidget {
               children: [
                 Icon( Icons.star_half_outlined, color: Colors.yellow.shade800 ),
                 const SizedBox( width: 3 ),
+                // copyWith es un método que se encarga de copiar un estilo y modificarlo
                 Text('${ movie.voteAverage }', style: textStyles.bodyMedium?.copyWith( color: Colors.yellow.shade800 )),
                 const Spacer(),
                 Text( HumanFormats.number(movie.popularity), style: textStyles.bodySmall ),
