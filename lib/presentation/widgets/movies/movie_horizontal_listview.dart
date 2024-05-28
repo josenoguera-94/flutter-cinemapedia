@@ -115,7 +115,7 @@ class _Slide extends StatelessWidget {
                       child: Center(child: CircularProgressIndicator(strokeWidth: 2 )),
                     );
                   }
-                  return GestureDetector(
+                  return GestureDetector( // GestureDetector para poder hacer onTap
                     onTap: () => context.push('/movie/${ movie.id }'),
                     child: FadeIn(child: child),
                   );

@@ -1,4 +1,5 @@
 
+// este objeto siver par ano utilizar notacoon de llaves si no de puntos a["hola"] a b.hola
 class MovieDetails {
     MovieDetails({
         required this.adult,

@@ -10,7 +10,7 @@ final appRouter = GoRouter(
       path: '/',
       name: HomeScreen.name,
       builder: (context, state) => const HomeScreen(),
-      routes: [
+      routes: [ // Nested routes permite que se pueda navegar a una ruta dentro de otra ruta y devolver a la ruta padre
          GoRoute(
           path: 'movie/:id',
           name: MovieScreen.name,
@@ -22,6 +22,14 @@ final appRouter = GoRouter(
         ),
       ]
     ),
+    // GoRoute(
+    //   path: 'movie/:id',
+    //   name: MovieScreen.name,
+    //   builder: (context, state) {
+    //     final movieId = state.params['id'] ?? 'no-id';
+    //     return MovieScreen( movieId: movieId );
+    //   },
+    // ),
 
 
 

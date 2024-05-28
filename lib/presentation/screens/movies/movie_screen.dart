@@ -28,7 +28,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   @override
   void initState() {
     super.initState();
-    
+    // si estamos dentro de métodos se utiliza el read 
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
     ref.read(actorsByMovieProvider.notifier).loadActors(widget.movieId);
 
@@ -39,6 +39,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
 
     final Movie? movie = ref.watch( movieInfoProvider )[widget.movieId];
 
+    // para que mientras se carga la información se muestre un loading
     if ( movie == null ) {
       return const Scaffold(body: Center( child: CircularProgressIndicator( strokeWidth: 2)));
     }
@@ -47,7 +48,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
     return Scaffold(
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
-        slivers: [
+        slivers: [ // slivers es un conjunto de widgets que permiten hacer scroll
           _CustomSliverAppBar(movie: movie),
           SliverList(delegate: SliverChildBuilderDelegate(
             (context, index) => _MovieDetails(movie: movie),
@@ -114,11 +115,11 @@ class _MovieDetails extends StatelessWidget {
         // Generos de la película
         Padding(
           padding: const EdgeInsets.all(8),
-          child: Wrap(
+          child: Wrap( // Wrap es un widget que permite que los hijos se acomoden en varias líneas
             children: [
               ...movie.genreIds.map((gender) => Container(
                 margin: const EdgeInsets.only( right: 10),
-                child: Chip(
+                child: Chip( // Chip es un widget que permite mostrar información en forma de etiquetas
                   label: Text( gender ),
                   shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20)),
                 ),
@@ -222,7 +223,7 @@ class _CustomSliverAppBar extends StatelessWidget {
       backgroundColor: Colors.black,
       expandedHeight: size.height * 0.7,
       foregroundColor: Colors.white,
-      flexibleSpace: FlexibleSpaceBar(
+      flexibleSpace: FlexibleSpaceBar( // flexibleSpace es el contenido que se muestra en el appbar
         titlePadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         // title: Text( 
         //   movie.title,
