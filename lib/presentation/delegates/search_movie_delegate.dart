@@ -10,11 +10,11 @@ typedef SearchMoviesCallback = Future<List<Movie>> Function( String query );
 
 class SearchMovieDelegate extends SearchDelegate<Movie?>{
 
-
+// SearchDelegate es una clase de Flutter que permite crear un widget de búsqueda
   final SearchMoviesCallback searchMovies;
   List<Movie> initialMovies;
   
-  StreamController<List<Movie>> debouncedMovies = StreamController.broadcast();
+  StreamController<List<Movie>> debouncedMovies = StreamController.broadcast(); // .broadcast() permite que varios widgets escuchen el stream
   StreamController<bool> isLoadingStream = StreamController.broadcast();
 
 
@@ -53,7 +53,8 @@ class SearchMovieDelegate extends SearchDelegate<Movie?>{
   }
 
   Widget buildResultsAndSuggestions() {
-    return StreamBuilder(
+    // puede ser un FutureBuilder o un StreamBuilder(future: searchMovies(query))
+    return StreamBuilder( // StreamBuilder es un widget de Flutter que permite construir widgets basados en un stream
       initialData: initialMovies,
       stream: debouncedMovies.stream,
       builder: (context, snapshot) {
@@ -79,11 +80,12 @@ class SearchMovieDelegate extends SearchDelegate<Movie?>{
   // String get searchFieldLabel => 'Buscar película';
 
   @override
-  List<Widget>? buildActions(BuildContext context) {
+  List<Widget>? buildActions(BuildContext context) { // buildActions es un método de SearchDelegate que permite construir widgets de acción
 
+    // print('query: $query');
     return [
 
-      StreamBuilder(
+      StreamBuilder( // StreamBuilder es un widget de Flutter que permite construir widgets basados en un stream
         initialData: false,
         stream: isLoadingStream.stream,
         builder: (context, snapshot) {
@@ -92,6 +94,7 @@ class SearchMovieDelegate extends SearchDelegate<Movie?>{
                   duration: const Duration(seconds: 20),
                   spins: 10,
                   infinite: true,
+                  // animate: query.isNotEmpty,
                   child: IconButton(
                     onPressed: () => query = '', 
                     icon: const Icon( Icons.refresh_rounded )
@@ -101,8 +104,9 @@ class SearchMovieDelegate extends SearchDelegate<Movie?>{
 
              return FadeIn(
                 animate: query.isNotEmpty,
+                // duration: const Duration( milliseconds: 300 ),
                 child: IconButton(
-                  onPressed: () => query = '', 
+                  onPressed: () => query = '',  // query es una propiedad de SearchDelegate que permite acceder al texto de búsqueda
                   icon: const Icon( Icons.clear )
                 ),
               );
@@ -119,7 +123,7 @@ class SearchMovieDelegate extends SearchDelegate<Movie?>{
   }
 
   @override
-  Widget? buildLeading(BuildContext context) {
+  Widget? buildLeading(BuildContext context) { // buildLeading es un método de SearchDelegate que permite construir widgets de navegación
     return IconButton(
       onPressed: () {
           clearStreams();
@@ -130,12 +134,12 @@ class SearchMovieDelegate extends SearchDelegate<Movie?>{
   }
 
   @override
-  Widget buildResults(BuildContext context) {
+  Widget buildResults(BuildContext context) { // buildResults es un método de SearchDelegate que permite construir widgets de resultados
     return buildResultsAndSuggestions();
   }
 
   @override
-  Widget buildSuggestions(BuildContext context) {
+  Widget buildSuggestions(BuildContext context) { // buildSuggestions es un método de SearchDelegate que permite construir widgets de sugerencias
 
     _onQueryChanged(query);
     return buildResultsAndSuggestions();
@@ -160,8 +164,8 @@ class _MovieItem extends StatelessWidget {
     final textStyles = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
 
-    return GestureDetector(
-      onTap: () {
+    return GestureDetector( // GestureDetector es un widget de Flutter que permite detectar gestos
+      onTap: () { // onTap es una propiedad de GestureDetector que permite detectar un toque
         onMovieSelected(context, movie);
       },
       child: Padding(
