@@ -235,13 +235,15 @@ class _CustomSliverAppBar extends ConsumerWidget {
             // ref.read(localStorageRepositoryProvider)
             //   .toggleFavorite(movie);
             await ref.read( favoriteMoviesProvider.notifier )
-              .toggleFavorite(movie);
+              .toggleFavorite(movie); // asincrono
             
-            ref.invalidate(isFavoriteProvider(movie.id));
+            ref.invalidate(isFavoriteProvider(movie.id)); // syncrono
+            //.invalidate(); // Invalida el estado de todos los providers
+            // y lo vuelve a confirmar
 
 
           }, 
-          icon: isFavoriteFuture.when(
+          icon: isFavoriteFuture.when( // when es un método de FutureProvider que permite manejar los estados de la petición
             loading: () => const CircularProgressIndicator(strokeWidth: 2 ),
             data: (isFavorite) => isFavorite 
               ? const Icon( Icons.favorite_rounded, color: Colors.red )

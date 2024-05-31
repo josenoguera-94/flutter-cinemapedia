@@ -1,12 +1,12 @@
 import 'package:isar/isar.dart';
 
-part 'movie.g.dart';
+part 'movie.g.dart'; // es un archivo que se va a generar de forma automática
 
-
-@collection
+// A la entidad le agregamos las caracteristicas de Isar
+@collection // Isar annotation
 class Movie {
 
-  Id? isarId;
+  Id? isarId; // Isar annotation,  con ? Isar le dice que ese campos es autoincrementable
 
   final bool adult;
   final String backdropPath;

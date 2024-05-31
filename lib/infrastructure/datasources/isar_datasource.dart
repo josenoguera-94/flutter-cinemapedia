@@ -8,7 +8,7 @@ import 'package:isar/isar.dart';
 
 class IsarDatasource extends LocalStorageDatasource {
   
-  late Future<Isar> db;
+  late Future<Isar> db; // late por que se inicializa después
 
   IsarDatasource() {
     db = openDB();
@@ -17,7 +17,8 @@ class IsarDatasource extends LocalStorageDatasource {
   Future<Isar> openDB() async {
     if ( Isar.instanceNames.isEmpty ) {
       final dir = await getApplicationDocumentsDirectory();
-      return await Isar.open([ MovieSchema ], inspector: true,directory: dir.path);
+      // MovieSchema es una clase generada por Isar
+      return await Isar.open([ MovieSchema ], inspector: true, directory: dir.path);
     }
 
     return Future.value(Isar.getInstance());
@@ -48,7 +49,7 @@ class IsarDatasource extends LocalStorageDatasource {
 
     if ( favoriteMovie != null ) {
       // Borrar
-      isar.writeTxnSync(() => isar.movies.deleteSync( favoriteMovie.isarId! ));
+      isar.writeTxnSync(() => isar.movies.deleteSync( favoriteMovie.isarId! )); // writeTxn
       return;
     }
 
