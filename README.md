@@ -104,3 +104,22 @@ flutter pub run change_app_package_name:main com.josedeveloper.cinemapedia
 
 5. Crear el App Bundle (creara un archivo .aab que se subira a Play Store)
    - `flutter build appbundle`
+
+6. Crear app en Play Store
+   - [Play Console](https://play.google.com/console)
+   - Crear una nueva app
+   - Configurar la app
+   - Subir el archivo .aab
+   - Configurar la app
+   - Publicar la app
+   
+   1. Crear app
+   2. Buscar pruebas > pruebas internas > crear versión
+      - pruebas internas hasta 100 usuarios de la organización
+      - pruebas cerradas (Alpha), más de 100 ususarios  un grupo de usuarios específicos fuera de la organización
+      - pruebas abiertas cualquier usuario.
+   3. Generar firmas, subir el archivo .aab, seguir pasos..., registrar testers y enviar links.
+      -  si hay nuevos features se pueden crear nuevas versiones.
+      -  Se puede promover la versión de internas a cerradas o abiertas o producción.
+
+7. Llenar ficha de la play Store en `Presencia en play Store`:
