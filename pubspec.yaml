@@ -37,6 +37,12 @@ flutter_launcher_icons:
   image_path: "assets/icons/app-icon-2.png"
   min_sdk_android: 21 # android min sdk min:16, default 2
 
+flutter_native_splash:
+  color: "#252829"
+  # image: "assets/icons/app-icon-2.png"
+  # android: true
+  # ios: true
+
 flutter:
   uses-material-design: true
 

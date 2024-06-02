@@ -38,4 +38,19 @@ flutter pub run change_app_package_name:main com.josedeveloper.cinemapedia
     ```
     2. Ejecutar el comando `flutter pub run flutter_launcher_icons`
 3. Splash Screen:
-   - `flutter_native_splash: ^1.2.0` (dev_dependencies) [flutter_native_splash](https://pub.dev/packages/flutter_native_splash)
+   1. Instala `flutter_native_splash: ^1.2.0` (dev_dependencies) [flutter_native_splash](https://pub.dev/packages/flutter_native_splash)
+   2. Configurar el archivo `pubspec.yaml`:
+    ```yml
+    flutter_native_splash:
+        color: "#42a5f5"
+        image: "assets/icons/splash.png"
+        android: true
+        ios: true
+    ```
+    3. Ejecutar el comando `dart run flutter_native_splash:create`
+
+4. Build and release an Android app
+- [Build and release an Android](https://docs.flutter.dev/deployment/android)
+    1. Ejecutar comando(en windows): 
+       - `keytool -genkey -v -keystore C:\Users\josenoguera\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload` se puede colocar cualquier nombre en lugar de `upload-keystore.jks`
+       - un warning The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using `keytool -importkeystore -srckeystore C:\Users\josenoguera\upload-keystore.jks -destkeystore C:\Users\josenoguera\upload-keystore.jks -deststoretype pkcs12`
