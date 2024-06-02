@@ -19,6 +19,7 @@ flutter pub run change_app_package_name:main com.josedeveloper.cinemapedia
 ## Pasos para subir a Play Store
 
 - [flutter deployment](https://docs.flutter.dev/deployment/android)
+- [Android](https://developer.android.com/studio/publish/upload-bundle?hl=es-419)
 
 1. Cambiar el nombre del paquete de la app
    1. añadir `change_app_package_name: ^1.1.0` al dev_dependencies en el archivo `pubspec.yaml`
@@ -50,7 +51,56 @@ flutter pub run change_app_package_name:main com.josedeveloper.cinemapedia
     3. Ejecutar el comando `dart run flutter_native_splash:create`
 
 4. Build and release an Android app
-- [Build and release an Android](https://docs.flutter.dev/deployment/android)
+   - [Build and release an Android](https://docs.flutter.dev/deployment/android)
     1. Ejecutar comando(en windows): 
-       - `keytool -genkey -v -keystore C:\Users\josenoguera\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload` se puede colocar cualquier nombre en lugar de `upload-keystore.jks`
-       - un warning The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using `keytool -importkeystore -srckeystore C:\Users\josenoguera\upload-keystore.jks -destkeystore C:\Users\josenoguera\upload-keystore.jks -deststoretype pkcs12`
+       - `keytool -genkey -v -keystore C:\Users\<user>\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload` se puede colocar cualquier nombre en lugar de `upload-keystore.jks`
+       - un warning The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using `keytool -importkeystore -srckeystore C:\Users\<user>\upload-keystore.jks -destkeystore C:\Users\<user>\upload-keystore.jks -deststoretype pkcs12`
+        
+    2. Configurar el archivo `android/key.properties`:
+        ```properties
+        storePassword=<password-from-previous-step>
+        keyPassword=<password-from-previous-step>
+        keyAlias=upload
+        storeFile=<keystore-file-location>
+        ```
+        - la ruta del archivo `keystore` debe ser absoluta y si está en windows se debe colocar la ruta con `/` en lugar de `\`. 
+    
+    3. Configurar el archivo `android/app/build.gradle`:
+        ```gradle
+
+        def keystoreProperties = new Properties()
+        def keystorePropertiesFile = rootProject.file('key.properties')
+        if (keystorePropertiesFile.exists()) {
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+        }
+
+        android {
+            ...
+        }
+
+        .
+        .
+        .
+        
+        signingConfigs {
+            release {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+
+        buildTypes {
+            release {
+                // TODO: Add your own signing config for the release build.
+                // Signing with the debug keys for now, so `flutter run --release` works.
+                // signingConfig signingConfigs.debug
+                signingConfig signingConfigs.release
+            }
+        }
+        ```
+4. Otros pasos en [deployment](https://docs.flutter.dev/deployment/android)
+
+5. Crear el App Bundle (creara un archivo .aab que se subira a Play Store)
+   - `flutter build appbundle`
